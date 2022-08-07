@@ -1,14 +1,5 @@
 import React from "react";
-import styled, {
-  createGlobalStyle,
-  css,
-  ThemeProvider,
-} from "styled-components";
-import Router from "./Router";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { darkTheme, lightTheme } from "./theme";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isChangeThemeAtom } from "./atoms";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -78,51 +69,10 @@ a{
 
 `;
 
-const ChangeThemeBtn = styled.button<{ toggle: boolean }>`
-  width: 60px;
-  height: 35px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  background-color: ${(props) => (props.theme.toggle ? "white" : "#2f3640")};
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.5s ease-in-out;
-  top: 10px;
-  right: -80%;
-`;
-const Circle = styled.div<{ toggle: boolean }>`
-  background-color: ${(props) => (props.theme.toggle ? "#2f3640" : "white")};
-  width: 25px;
-  height: 25px;
-  border-radius: 50px;
-  position: absolute;
-  left: 5%;
-  transition: all 0.5s ease-in-out;
-  ${(props) =>
-    props.toggle &&
-    css`
-      transform: translate(30px, 0);
-      transition: all 0.5s ease-in-out;
-    `}
-`;
-
 function App() {
-  const isChangeTheme = useRecoilValue(isChangeThemeAtom);
-  const setChangeTheme = useSetRecoilState(isChangeThemeAtom);
-  const toggleTheme = () => setChangeTheme((prev) => !prev);
   return (
     <>
-      <ThemeProvider theme={isChangeTheme ? darkTheme : lightTheme}>
-        <GlobalStyle />
-        <ChangeThemeBtn onClick={toggleTheme} toggle={isChangeTheme}>
-          <Circle toggle={isChangeTheme} />
-        </ChangeThemeBtn>
-        <Router />
-        <ReactQueryDevtools />
-      </ThemeProvider>
+      <GlobalStyle />
     </>
   );
 }
