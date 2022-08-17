@@ -1,3 +1,4 @@
+import React from "react";
 import { IToDo, toDoState } from "../atoms";
 import { useSetRecoilState } from "recoil";
 
@@ -23,13 +24,13 @@ function ToDo({ text, category, id }: IToDo) {
           To Do
         </button>
       )}
-      {category !== "Doing" && (
-        <button name="Doing" onClick={onClick}>
+      {category !== "DOING" && (
+        <button name="DOING" onClick={onClick}>
           Doing
         </button>
       )}
-      {category !== "Done" && (
-        <button name="Done" onClick={onClick}>
+      {category !== "DONE" && (
+        <button name="DONE" onClick={onClick}>
           Done
         </button>
       )}
